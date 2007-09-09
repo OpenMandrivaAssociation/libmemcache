@@ -1,10 +1,11 @@
 %define	major 0
-%define libname	%mklibname memcache %{major}
+%define libname %mklibname memcache %{major}
+%define develname %mklibname memcache -d
 
 Summary:	A high performance C API for memcached
 Name:		libmemcache
 Version:	1.4.0
-Release:	%mkrel 0.rc2.2
+Release:	%mkrel 0.rc2.3
 Group:		System/Libraries
 License:	BSD-like
 URL:		http://people.freebsd.org/~seanc/libmemcache/
@@ -25,15 +26,17 @@ Group:          System/Libraries
 libmemcache is the C API for memcached(8), a high-performance,
 distributed memory object caching system. 
 
-%package -n	%{libname}-devel
+%package -n	%{develname}
 Summary:	Static library and header files for the libmemcache library
 Group:		Development/C
-Obsoletes:	%{name}-devel memcache-devel
-Obsoletes:	%{mklibname memcache 1}-devel
-Provides:	%{name}-devel memcache-devel
 Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
+Provides:	memcache-devel = %{version}-%{release}
+Obsoletes:	memcache-devel
+Obsoletes:	%{mklibname memcache 0 -d}
+Obsoletes:	%{mklibname memcache 1 -d}
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 libmemcache is the C API for memcached(8), a high-performance,
 distributed memory object caching system. 
 
@@ -70,11 +73,9 @@ header files.
 %doc COPYING ChangeLog INSTALL
 %{_libdir}/*.so.*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/*.a
 %{_libdir}/*.la
-
-
