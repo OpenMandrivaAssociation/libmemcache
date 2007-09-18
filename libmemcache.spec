@@ -5,7 +5,7 @@
 Summary:	A high performance C API for memcached
 Name:		libmemcache
 Version:	1.4.0
-Release:	%mkrel 0.rc2.3
+Release:	%mkrel 0.rc2.4
 Group:		System/Libraries
 License:	BSD-like
 URL:		http://people.freebsd.org/~seanc/libmemcache/
