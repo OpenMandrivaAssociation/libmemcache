@@ -12,7 +12,6 @@ URL:		http://people.freebsd.org/~seanc/libmemcache/
 Source0:	http://people.freebsd.org/~seanc/libmemcache/%{name}-%{version}.rc2.tar.bz2
 BuildRequires:	libtool
 BuildRequires:	autoconf2.5
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 libmemcache is the C API for memcached(8), a high-performance,
