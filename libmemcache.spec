@@ -5,14 +5,17 @@
 Summary:	A high performance C API for memcached
 Name:		libmemcache
 Version:	1.4.0
-Release:	%mkrel 0.rc2.4
+Release:	%mkrel 0.rc2.5
 Group:		System/Libraries
 License:	BSD-like
 URL:		http://people.freebsd.org/~seanc/libmemcache/
 Source0:	http://people.freebsd.org/~seanc/libmemcache/%{name}-%{version}.rc2.tar.bz2
+Patch0:		libmemcache-1.4.0.rc2_gnusource.patch
+Patch1:		libmemcache-1.4.0.rc2_gcc43_inline.patch
+Patch2:		libmemcache-1.4.0.rc2_preserve_cflags.patch
 BuildRequires:	libtool
 BuildRequires:	autoconf2.5
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 libmemcache is the C API for memcached(8), a high-performance,
@@ -46,8 +49,14 @@ header files.
 %prep
 
 %setup -q -n %{name}-%{version}.rc2
+%patch0
+%patch1
+%patch2
 
 %build
+touch NEWS README AUTHORS
+autoreconf -fis
+export STRIP="/bin/true"
 
 %configure2_5x
 
@@ -57,7 +66,7 @@ header files.
 #make test
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %makeinstall_std
 
@@ -70,7 +79,7 @@ header files.
 %endif
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-,root,root)
