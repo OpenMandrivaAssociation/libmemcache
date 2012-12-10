@@ -5,7 +5,7 @@
 Summary:	A high performance C API for memcached
 Name:		libmemcache
 Version:	1.4.0
-Release:	%mkrel 0.rc2.7
+Release:	0.rc2.8
 Group:		System/Libraries
 License:	BSD-like
 URL:		http://people.freebsd.org/~seanc/libmemcache/
@@ -15,7 +15,6 @@ Patch1:		libmemcache-1.4.0.rc2_gcc43_inline.patch
 Patch2:		libmemcache-1.4.0.rc2_preserve_cflags.patch
 BuildRequires:	libtool
 BuildRequires:	autoconf2.5
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 libmemcache is the C API for memcached(8), a high-performance,
@@ -33,8 +32,8 @@ distributed memory object caching system.
 Summary:	Static library and header files for the libmemcache library
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release}
-Provides:	memcache-devel = %{version}-%{release}
+Provides:	%{name}-devel = %{EVRD}
+Provides:	memcache-devel = %{EVRD}
 Obsoletes:	memcache-devel
 Obsoletes:	%{mklibname memcache 0 -d}
 Obsoletes:	%{mklibname memcache 1 -d}
@@ -66,29 +65,64 @@ export STRIP="/bin/true"
 #make test
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files -n %{libname}
-%defattr(-,root,root)
 %doc COPYING ChangeLog INSTALL
 %{_libdir}/*.so.*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/*.a
-%{_libdir}/*.la
+
+
+%changelog
+* Fri Dec 10 2010 Oden Eriksson <oeriksson@mandriva.com> 1.4.0-0.rc2.7mdv2011.0
++ Revision: 620151
+- the mass rebuild of 2010.0 packages
+
+* Fri Sep 04 2009 Thierry Vignaud <tv@mandriva.org> 1.4.0-0.rc2.6mdv2010.0
++ Revision: 429809
+- rebuild
+
+* Sat Jun 28 2008 Oden Eriksson <oeriksson@mandriva.com> 1.4.0-0.rc2.5mdv2009.0
++ Revision: 229677
+- added 3 patches from opensuse to make it compile
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Tue Sep 18 2007 Guillaume Rousse <guillomovitch@mandriva.org> 1.4.0-0.rc2.4mdv2008.0
++ Revision: 89839
+- rebuild
+
+* Sun Sep 09 2007 Oden Eriksson <oeriksson@mandriva.com> 1.4.0-0.rc2.3mdv2008.0
++ Revision: 83525
+- new devel naming
+
+
+* Thu Nov 02 2006 Oden Eriksson <oeriksson@mandriva.com> 1.4.0-0.rc2.2mdv2007.0
++ Revision: 75442
+- fix deps
+- Import libmemcache
+
+* Thu Apr 20 2006 Oden Eriksson <oeriksson@mandriva.com> 1.4.0-0.rc2.1mdk
+- 1.4.0.rc2
+- fix deps
+
+* Mon Jan 24 2005 Oden Eriksson <oeriksson@mandrakesoft.com> 1.4.0-0.b9.1mdk
+- 1.4.0.b9
+
+* Mon Jan 24 2005 Oden Eriksson <oeriksson@mandrakesoft.com> 1.2.3-1mdk
+- 1.2.3
+
+* Sun Jan 23 2005 Oden Eriksson <oeriksson@mandrakesoft.com> 1.2.2-1mdk
+- initial Mandrakelinux package
+
