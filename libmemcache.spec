@@ -8,7 +8,7 @@ Version:	1.4.0
 Release:	1.rc2.8
 Group:		System/Libraries
 License:	BSD-like
-URL:		http://people.freebsd.org/~seanc/libmemcache/
+URL:		https://people.freebsd.org/~seanc/libmemcache/
 Source0:	http://people.freebsd.org/~seanc/libmemcache/%{name}-%{version}.rc2.tar.bz2
 Patch0:		libmemcache-1.4.0.rc2_gnusource.patch
 Patch1:		libmemcache-1.4.0.rc2_gcc43_inline.patch
