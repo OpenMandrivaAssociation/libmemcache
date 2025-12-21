@@ -13,6 +13,10 @@ Source0:	http://people.freebsd.org/~seanc/libmemcache/%{name}-%{version}.rc2.tar
 Patch0:		libmemcache-1.4.0.rc2_gnusource.patch
 Patch1:		libmemcache-1.4.0.rc2_gcc43_inline.patch
 Patch2:		libmemcache-1.4.0.rc2_preserve_cflags.patch
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	libtool
 BuildRequires:	autoconf2.5
 
